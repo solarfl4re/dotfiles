@@ -105,4 +105,7 @@ set sidescroll=1
 
 
 " ================ Custom Settings ========================
+
+let g:session_autosave = 'no'
+let g:session_autoload = 'no'
 " so ~/.yadr/vim/settings.vim
