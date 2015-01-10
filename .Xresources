@@ -1,5 +1,5 @@
 URxvt.intensityStyles: false
-URxvt.font: xft:DejaVu Sans Mono:size=14
+URxvt.font: xft:Source Code Pro:size=16
 
 Xft.autohint: 0
 Xft.dpi: 96

@@ -1,5 +1,5 @@
 Bundle "justinmk/vim-sneak"
-" Bundle "rking/ag.vim"
+Bundle "rking/ag.vim"
 Bundle "vim-scripts/IndexedSearch"
 Bundle "nelstrom/vim-visual-star-search"
 Bundle "skwp/greplace.vim"

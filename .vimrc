@@ -108,4 +108,17 @@ set sidescroll=1
 
 let g:session_autosave = 'no'
 let g:session_autoload = 'no'
-" so ~/.yadr/vim/settings.vim
+
+" Key mappings " {{{
+
+" vimrc
+nnoremap <leader>re :e ~/dotfiles/.vimrc<CR>
+nnoremap <leader>rs :source ~/.vimrc<CR>
+
+" Make Control-direction switch between windows (like C-W h, etc)
+nmap <silent> <C-k> <C-W><C-k>
+nmap <silent> <C-j> <C-W><C-j>
+nmap <silent> <C-h> <C-W><C-h>
+nmap <silent> <C-l> <C-W><C-l>
+
+
