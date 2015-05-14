@@ -1,2 +1,5 @@
 .vim/backups
 .vim/bundle
+.vim/colors
+.vim/sessions
+.vim/autoload
