@@ -1,13 +1,47 @@
-"
-" Use Vim settings, rather then Vi settings (much better!).
-" This must be first, because it changes other options as a side effect.
-set nocompatible
+" =============== Vundle Initialization ===============
+set nocompatible              " be iMproved, required
+filetype off                  " required
 
-" TODO: this may not be in the correct place. It is intended to allow overriding <Leader>.
-" source ~/.vimrc.before if it exists.
-if filereadable(expand("~/.vimrc.before"))
-  source ~/.vimrc.before
-endif
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+Plugin 'bruno-/vim-man'
+
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+" plugin on GitHub repo
+"   Plugin 'tpope/vim-fugitive'
+" plugin from http://vim-scripts.org/vim/scripts.html
+"   Plugin 'L9'
+" Git plugin not hosted on GitHub
+"   Plugin 'git://git.wincent.com/command-t.git'
+" git repos on your local machine (i.e. when working on your own plugin)
+"   Plugin 'file:///home/gmarik/path/to/plugin'
+" The sparkup vim script is in a subdirectory of this repo called vim.
+" Pass the path to set the runtimepath properly.
+"   Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+" Avoid a name conflict with L9
+"   Plugin 'user/L9', {'name': 'newL9'}
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
 
 " ================ General Config ====================
 
@@ -20,6 +54,7 @@ set gcr=a:blinkon0              "Disable cursor blink
 set visualbell                  "No sounds
 set autoread                    "Reload files changed outside vim
 
+set encoding=utf8
 " This makes vim act like all other editors, buffers can
 " exist in the background without being in a window.
 " http://items.sjbach.com/319/configuring-vim-right
@@ -33,13 +68,6 @@ syntax on
 " The mapleader has to be set before vundle starts loading all 
 " the plugins.
 let mapleader=","
-
-" =============== Vundle Initialization ===============
-" This loads all the plugins specified in ~/.vim/vundles.vim
-" Use Vundle plugin to manage all other plugins
-if filereadable(expand("~/.vim/vundles.vim"))
-  source ~/.vim/vundles.vim
-endif
 
 " ================ Turn Off Swap Files ==============
 
@@ -55,6 +83,16 @@ if has('persistent_undo')
   set undodir=~/.vim/backups
   set undofile
 endif
+
+" ================ Appearance  ======================
+let g:solarized_termcolors=256
+colorscheme solarized
+" set background=dark
+set t_Co=256
+
+" Disable visual bell
+set visualbell
+set t_vb=
 
 " ================ Indentation ======================
 
@@ -105,6 +143,8 @@ set sidescroll=1
 
 
 " ================ Custom Settings ========================
+" For reading man pages
+let $PAGER=''
 
 let g:session_autosave = 'no'
 let g:session_autoload = 'no'
@@ -116,9 +156,9 @@ nnoremap <leader>re :e ~/dotfiles/.vimrc<CR>
 nnoremap <leader>rs :source ~/.vimrc<CR>
 
 " Make Control-direction switch between windows (like C-W h, etc)
-nmap <silent> <C-k> <C-W><C-k>
-nmap <silent> <C-j> <C-W><C-j>
-nmap <silent> <C-h> <C-W><C-h>
-nmap <silent> <C-l> <C-W><C-l>
+nmap <silent> <C-k> <C-W><k>
+nmap <silent> <C-j> <C-W>j
+nmap <silent> <C-h> <C-W>h
+nmap <silent> <C-l> <C-W>l
 
 
