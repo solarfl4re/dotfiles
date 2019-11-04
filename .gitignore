@@ -1,2 +1,1 @@
-.vim/backups
-.vim/bundle
+.config/nvim/plugged
