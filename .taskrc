@@ -29,9 +29,11 @@ data.location=~/.task
 include /data/data/com.termux/files/usr/share/doc/task/rc/solarized-light-256.theme
 #include /data/data/com.termux/files/usr/share/doc/task/rc/no-color.theme
 
-taskd.certificate=\/data\/data\/com.termux\/files\/home\/.task\/david.cert.pem
-taskd.key=\/data\/data\/com.termux\/files\/home\/.task\/david.key.pem
-taskd.ca=\/data\/data\/com.termux\/files\/home\/.task\/ca.cert.pem
+taskd.certificate=~\/.task\/david.cert.pem
+taskd.key=~\/.task\/david.key.pem
+taskd.ca=~\/.task\/ca.cert.pem
 taskd.server=davidlane.io:53589
 taskd.credentials=davidlane\/david\/56f0456d-ee58-4387-b322-c5991a47892f
 context.work=+work or project:nmblog
+context.home=-work
+context=home
