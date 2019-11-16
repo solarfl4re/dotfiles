@@ -5,11 +5,20 @@ call plug#begin()
 Plug 'junegunn/goyo.vim'
 Plug 'masukomi/vim-markdown-folding'
 Plug 'arzg/vim-corvine'
+Plug 'morhetz/gruvbox'
 call plug#end()
 
+" Syntax
+syntax on
+
 " Color
-colorscheme corvine_light
-set termguicolors " Make the theme look good!
+set background=dark
+colorscheme gruvbox
+
+
+" Language
+" Set langmap here? what's the best way to do it? SSH + Russian + iOS
+"set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz 
 
 " Autocommands
 "if !exists("autocommands_loaded")
