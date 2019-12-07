@@ -1,0 +1,11 @@
+#!/bin/bash
+
+case "$1" in
+	*youtu*)
+		echo "$1 is a YouTube URL, downloading"
+		sh ~/shortcuts/dl_yt.sh $1
+		;;
+	*)
+		echo "Something else!"
+		;;
+	esac
