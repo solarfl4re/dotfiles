@@ -83,3 +83,13 @@ if (( ${+terminfo[smkx]} && ${+terminfo[rmkx]} )); then
 	add-zle-hook-widget -Uz zle-line-init zle_application_mode_start
 	add-zle-hook-widget -Uz zle-line-finish zle_application_mode_stop
 fi
+
+# Taskwarrior
+export TASKDDATA=~/.local/taskd
+
+function startvnc {
+  vncserver -geometry 1400x1050
+}
+
+# Source my aliases
+source $HOME/.aliases
