@@ -6,8 +6,11 @@ Plug 'junegunn/goyo.vim'
 Plug 'masukomi/vim-markdown-folding'
 Plug 'arzg/vim-corvine'
 Plug 'morhetz/gruvbox'
+Plug 'altercation/vim-colors-solarized'
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'tpope/vim-fugitive'
+Plug 'pangloss/vim-javascript'
+Plug 'evanleck/vim-svelte'
 call plug#end()
 
 " Syntax
