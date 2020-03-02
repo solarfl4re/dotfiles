@@ -1,0 +1,3 @@
+[submodule "nvim/.config/nvim/keymap"]
+	path = nvim/.config/nvim/keymap
+	url = https://github.com/solarfl4re/vim-colemak-ru-uk-keymaps.git
