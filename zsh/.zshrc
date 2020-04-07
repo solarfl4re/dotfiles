@@ -91,5 +91,15 @@ function startvnc {
   vncserver -geometry 1400x1050
 }
 
+function work {
+  cd ~/documents && nvim work.md
+}
+
+function posts {
+  cd ~/novamova/socialmedia && nvim posts_2020.md
+}
+
 # Source my aliases
 source $HOME/.aliases
+
+export PATH=/home/david/.local/lib/python3.6:$PATH
