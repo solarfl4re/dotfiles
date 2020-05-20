@@ -11,7 +11,12 @@ Plug 'mustache/vim-mustache-handlebars'
 Plug 'tpope/vim-fugitive'
 Plug 'pangloss/vim-javascript'
 Plug 'evanleck/vim-svelte'
+Plug 'vimwiki/vimwiki'
 call plug#end()
+
+" Plugin options
+autocmd FileType markdown set foldexpr=NestedMarkdownFolds()
+
 
 " Syntax
 syntax on
@@ -29,6 +34,13 @@ colorscheme gruvbox
 " <leader>
 let mapleader=","
 
+" Keymappings
+" From practical vim p. 79
+nnoremap <silent> [b :bprevious<CR>
+nnoremap <silent> ]b :bnext<CR>
+nnoremap <silent> [B :bfirst<CR>
+nnoremap <silent> ]B :blast<CR>
+
 " Language
 " Set langmap here? what's the best way to do it? SSH + Russian + iOS
 " Russian + Colemak langmap
@@ -36,6 +48,9 @@ nmap <leader>r :set keymap=russian-colemak<CR>:set spelllang=ru,en<CR>
 " Ukrainian + Colemak langmap
 nmap <leader>u :set keymap=ukrainian-colemak<CR>:set spelllang=uk,en<CR>
 nmap <leader>e :set keymap=<CR>:set spelllang=en<CR>
+" map tn <C-^>
+" iminsert 1 or 0
+"
 
 " Autocommands
 if !exists("autocommands_loaded")
