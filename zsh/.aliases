@@ -9,3 +9,5 @@ alias gp="git push"
 alias gd="git diff HEAD"
 
 alias ls="ls -F"
+
+alias youtube-playlist="youtube-dl -x -f bestaudio -o \"%(playlist_index)s - %(title)s.%(ext)s\""
