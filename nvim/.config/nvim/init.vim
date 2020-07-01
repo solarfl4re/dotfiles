@@ -10,8 +10,6 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'tpope/vim-fugitive'
 Plug 'pangloss/vim-javascript'
-Plug 'evanleck/vim-svelte'
-Plug 'vimwiki/vimwiki'
 call plug#end()
 
 " Plugin options
@@ -28,8 +26,9 @@ set tabstop=2
 set autoindent
 
 " Color
-set background=dark
-colorscheme gruvbox
+set termguicolors
+set background=light
+colorscheme solarized
 
 " <leader>
 let mapleader=","
