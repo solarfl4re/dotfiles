@@ -57,5 +57,6 @@ if !exists("autocommands_loaded")
 	let autocommands_loaded = 1
 	au Filetype markdown set linebreak 
 endif
+au BufRead,BufNewFile *.svelte set filetype=html
 
 set mouse=a
