@@ -21,6 +21,7 @@ setopt nocaseglob
 # History
 SAVEHIST=4000
 HISTSIZE=2000
+HISTFILE=.zhistory
 setopt sharehistory
 setopt appendhistory
 setopt inc_append_history
@@ -102,4 +103,5 @@ function posts {
 # Source my aliases
 source $HOME/.aliases
 
-export PATH=/home/david/.local/lib/python3.6:$PATH
+export PATH=/home/david/.local/bin:$PATH
+export GNUPGHOME=/home/david/.config/gnupg
