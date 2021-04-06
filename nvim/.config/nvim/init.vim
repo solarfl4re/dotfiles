@@ -10,6 +10,7 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'tpope/vim-fugitive'
 Plug 'pangloss/vim-javascript'
+Plug 'preservim/nerdtree'
 call plug#end()
 
 " Plugin options
@@ -26,8 +27,8 @@ set tabstop=2
 set autoindent
 
 " Color
-set background=dark
-colorscheme gruvbox
+set background=light
+colorscheme solarized
 
 " <leader>
 let mapleader=","
@@ -38,6 +39,11 @@ nnoremap <silent> [b :bprevious<CR>
 nnoremap <silent> ]b :bnext<CR>
 nnoremap <silent> [B :bfirst<CR>
 nnoremap <silent> ]B :blast<CR>
+
+nnoremap <silent> [t :tabprevious<CR>
+nnoremap <silent> ]t :tabnext<CR>
+nnoremap <silent> [T :tabfirst<CR>
+nnoremap <silent> ]T :tablast<CR>
 
 " Language
 " Set langmap here? what's the best way to do it? SSH + Russian + iOS
