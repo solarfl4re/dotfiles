@@ -21,7 +21,7 @@ setopt nocaseglob
 # History
 SAVEHIST=4000
 HISTSIZE=2000
-HISTFILE=.zhistory
+HISTFILE=/home/david/.zhistory
 setopt sharehistory
 setopt appendhistory
 setopt inc_append_history
@@ -103,5 +103,11 @@ function posts {
 # Source my aliases
 source $HOME/.aliases
 
-export PATH=/home/david/.local/bin:$PATH
+export WSL_HOST=$(cat /etc/resolv.conf | grep nameserver | awk {'print $2; exit;'})
+export ADB_SERVER_SOCKET=tcp:$WSL_HOST:5037
+export PATH=/home/david/.local/bin:/home/david/.cargo/bin:$PATH
 export GNUPGHOME=/home/david/.config/gnupg
+
+# for i3
+#export GDK_SCALE=2
+#export QT_SCALE_FACTOR=2
