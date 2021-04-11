@@ -1,3 +1,6 @@
+# use VI keys
+bindkey -v
+
 # Completion
 autoload -Uz compinit promptinit
 compinit
@@ -85,9 +88,6 @@ if (( ${+terminfo[smkx]} && ${+terminfo[rmkx]} )); then
 	add-zle-hook-widget -Uz zle-line-finish zle_application_mode_stop
 fi
 
-# Taskwarrior
-export TASKDDATA=~/.local/taskd
-
 function startvnc {
   vncserver -geometry 1400x1050
 }
@@ -103,11 +103,15 @@ function posts {
 # Source my aliases
 source $HOME/.aliases
 
-export WSL_HOST=$(cat /etc/resolv.conf | grep nameserver | awk {'print $2; exit;'})
-export ADB_SERVER_SOCKET=tcp:$WSL_HOST:5037
+#export WSL_HOST=$(cat /etc/resolv.conf | grep nameserver | awk {'print $2; exit;'})
+#export ADB_SERVER_SOCKET=tcp:$WSL_HOST:5037
 export PATH=/home/david/.local/bin:/home/david/.cargo/bin:$PATH
-export GNUPGHOME=/home/david/.config/gnupg
 
-# for i3
-#export GDK_SCALE=2
-#export QT_SCALE_FACTOR=2
+# HighDPI scaling: scale by 2 and then use
+# xrandr to scale the display down
+# (https://ricostacruz.com/til/fractional-scaling-on-xorg-linux)
+export GDK_SCALE=2
+export GDK_DPI_SCALE=0.5
+export QT_AUTO_SCREEN_SET_FACTOR=0
+export QT_SCALE_FACTOR=2
+export QT_FONT_DPI=96

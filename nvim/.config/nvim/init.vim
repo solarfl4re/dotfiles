@@ -27,8 +27,9 @@ set tabstop=2
 set autoindent
 
 " Color
-set background=light
-colorscheme solarized
+set background=dark
+colorscheme corvine
+set termguicolors
 
 " <leader>
 let mapleader=","
