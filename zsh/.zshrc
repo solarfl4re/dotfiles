@@ -24,7 +24,7 @@ setopt nocaseglob
 # History
 SAVEHIST=4000
 HISTSIZE=2000
-HISTFILE=/home/david/.zhistory
+HISTFILE=~/.zhistory
 setopt sharehistory
 setopt appendhistory
 setopt inc_append_history
@@ -38,7 +38,7 @@ setopt hist_verify
 
 # Correct mistyped shell commands
 setopt correct
-setopt correct_all
+#setopt correct_all
 
 export EDITOR=nvim
 
@@ -100,12 +100,16 @@ function posts {
   cd ~/novamova/socialmedia && nvim posts_2020.md
 }
 
+function adestart { 
+  WINEPREFIX=/media/sdcard/david/.adewine/ wine /media/sdcard/david/.adewine//drive_c/Program\ Files/Adobe\ Digital\ Editions\ 2.0/DigitalEditions.exe "$@" >/dev/null 2>&1 & 
+}
+
 # Source my aliases
 source $HOME/.aliases
 
 #export WSL_HOST=$(cat /etc/resolv.conf | grep nameserver | awk {'print $2; exit;'})
 #export ADB_SERVER_SOCKET=tcp:$WSL_HOST:5037
-export PATH=/home/david/.local/bin:/home/david/.cargo/bin:$PATH
+export PATH=~/.local/bin:~/.cargo/bin:/usr/lib/jvm/default/bin:${PATH}
 
 # HighDPI scaling: scale by 2 and then use
 # xrandr to scale the display down
@@ -115,3 +119,8 @@ export GDK_DPI_SCALE=0.5
 export QT_AUTO_SCREEN_SET_FACTOR=0
 export QT_SCALE_FACTOR=2
 export QT_FONT_DPI=96
+# for SSH agent .service
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+# Wine
+export WINEPREFIX=~/.local/wine
+source /usr/share/nvm/init-nvm.sh

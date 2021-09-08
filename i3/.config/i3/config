@@ -17,16 +17,13 @@ set $mod Mod4
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:DejaVu Sans Mono 9
-
-# DPI
-#exec "xrandr --dpi 144"
+font pango:DejaVu Sans Mono 7
 
 # Scale down the display (from 200%)
-exec "xrandr --output eDP-1 --scale '1.07x1.07'"
+#exec "xrandr --output eDP-1 --scale '1.07x1.07'"
 
-# Keyboard layouts
-#exec "setxkbmap -model pc104 -layout us,ru,ua -variant colemak,,"
+# Start onscreen keyboard
+exec --no-startup-id onboard &
 
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
 # they are included here as an example. Modify as you see fit.
@@ -35,15 +32,27 @@ exec "xrandr --output eDP-1 --scale '1.07x1.07'"
 # screen before suspend. Use loginctl lock-session to lock your screen.
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i2lock --nofork
 
+# Ulauncher
+exec --no-startup-id ulauncher
+
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
 
+# Bluetooth
+exec --no-startup-id blueman-applet
+
+# Pulseaudio applet
+exec --no-startup-id pasystray
+
 # Use pactl to adjust volume in PulseAudio.
-#set $refresh_i3status killall -SIGUSR1 i3status
-#bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
-#bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
-#bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+set $refresh_i3status killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status
+# 10%
+bindsym Control+XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+bindsym Control+XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 #bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
 # use these keys for focus, movement, and resize directions when reaching for
@@ -206,14 +215,18 @@ bar {
         status_command i3status
 }
 
-## Volume control
-bindsym XF86AudioRaiseVolume exec /usr/bin/amixer set Master 5+
-bindsym XF86AudioLowerVolume exec /usr/bin/amixer set Master 5-
-bindsym XF86AudioMute        exec /usr/bin/amixer set Master toggle
+## Volume control - ALSA
+#bindsym XF86AudioRaiseVolume exec /usr/bin/amixer set Master 5+
+#bindsym XF86AudioLowerVolume exec /usr/bin/amixer set Master 5-
+#bindsym XF86AudioMute        exec /usr/bin/amixer set Master toggle
 
 ## Brightness
 bindsym XF86MonBrightnessUp        exec /usr/bin/xbacklight -inc 5
 bindsym XF86MonBrightnessDown        exec /usr/bin/xbacklight -dec 5
+
+# Blugon color temp
+bindsym Control+XF86MonBrightnessUp        exec /usr/bin/blugon --setcurrent="+600"
+bindsym Control+XF86MonBrightnessDown        exec /usr/bin/blugon --setcurrent="-600"
 
 ## System menu from 
 set $Locker i3lock -i /home/david/.local/share/background.png -c 000000 && sleep 1
@@ -234,3 +247,7 @@ mode "$mode_system" {
 }
 
 bindsym $mod+Escape mode "$mode_system"
+
+## My customizations
+### As https://superuser.com/questions/374637/how-to-turn-off-screen-with-shortcut-in-linux
+bindsym $mod+o exec ~/.local/bin/screen-off.sh
