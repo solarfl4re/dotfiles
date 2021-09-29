@@ -9,6 +9,7 @@ alias gp="git push"
 alias gd="git diff HEAD"
 
 alias ls="ls -F"
+alias lt="ls -ctr | tail -n 5"
 
 alias youtube-playlist="youtube-dl -x -f bestaudio -o \"%(playlist_index)s - %(title)s.%(ext)s\""
 alias emacs="TERM=xterm-256color emacs"

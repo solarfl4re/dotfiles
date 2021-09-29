@@ -92,14 +92,6 @@ function startvnc {
   vncserver -geometry 1400x1050
 }
 
-function work {
-  cd ~/documents && nvim work.md
-}
-
-function posts {
-  cd ~/novamova/socialmedia && nvim posts_2020.md
-}
-
 function adestart { 
   WINEPREFIX=/media/sdcard/david/.adewine/ wine /media/sdcard/david/.adewine//drive_c/Program\ Files/Adobe\ Digital\ Editions\ 2.0/DigitalEditions.exe "$@" >/dev/null 2>&1 & 
 }
@@ -123,4 +115,5 @@ export QT_FONT_DPI=96
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 # Wine
 export WINEPREFIX=~/.local/wine
+export TERMINAL=alacritty
 source /usr/share/nvm/init-nvm.sh
