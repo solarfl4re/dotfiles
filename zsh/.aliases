@@ -12,6 +12,7 @@ alias ls="ls -F"
 alias lt="ls -ctr | tail -n 5"
 
 alias youtube-playlist="youtube-dl -x -f bestaudio -o \"%(playlist_index)s - %(title)s.%(ext)s\""
+alias youtube-cover="youtube-dl --write-thumbnail --playlist-items 1 --skip-download -o \"cover.%(ext)s\""
 alias emacs="TERM=xterm-256color emacs"
 #alias audacity="QT_SCALE_FACTOR=2 audacity"
 #alias xournalpp="GDK_SCALE=2 GDK_DPI_SCALE=0.5 xournalpp"
