@@ -81,6 +81,9 @@ bindsym $mod+p exec "passmenu"
 # .desktop file. It is a wrapper around dmenu, so you need that installed.
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
+#dmenu music
+bindsym $mod+m exec cd ~/music && mpv $(ls ~/music | rofi -matching fuzzy -dmenu)
+
 # change focus
 bindsym $mod+$left focus left
 bindsym $mod+$down focus down
@@ -251,3 +254,18 @@ bindsym $mod+Escape mode "$mode_system"
 ## My customizations
 ### As https://superuser.com/questions/374637/how-to-turn-off-screen-with-shortcut-in-linux
 bindsym $mod+o exec ~/.local/bin/screen-off.sh
+
+# Airpods connect/disconnect menu
+set $mode_devices (c)connect Airpods (d)Disconnect Airpods
+mode "$mode_devices" {
+  bindsym c exec --no-startup-id echo -e "connect D0:65:44:5F:AB:C2" | bluetoothctl && sleep 5 && pactl set-default-sink bluez_output.D0_65_44_5F_AB_C2.a2dp-sink, mode "default"
+  bindsym d exec --no-startup-id echo -e "disconnect D0:65:44:5F:AB:C2" | bluetoothctl, mode "default"
+
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+bindsym $mod+c mode "$mode_devices"
+
+### Specific window configs
+for_window [window_role="GtkFileChooserDialog"] resize set 1200 1000, move position center
+#move position center
