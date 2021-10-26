@@ -51,14 +51,12 @@ memory {
 }
 
 volume master {
-        format = "V %volume"
-        format_muted = "V m (%volume)"
-        device = "default"
-        mixer = "Master"
+  format = "♪: %volume"
+    format_muted = "♪: muted (%volume)"
 }
 
 tztime kyiv {
-        format = "%H:%M"
+        format = "Kyiv %H:%M"
         timezone = "Europe/Kyiv"
 }
   
