@@ -116,4 +116,5 @@ export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 # Wine
 export WINEPREFIX=~/.local/wine
 export TERMINAL=alacritty
-source /usr/share/nvm/init-nvm.sh
+# Too slow!
+#source /usr/share/nvm/init-nvm.sh
