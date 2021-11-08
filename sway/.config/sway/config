@@ -18,18 +18,21 @@ set $term alacritty
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-#set $menu /usr/bin/kickoff | kickoff | xargs swaymsg exec --
-set $menu /usr/bin/rofi | rofi | xargs swaymsg exec --
+set $menu exec $term --class=launcher -e /usr/bin/sway-launcher-desktop
 
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-set $SWAYSOCK $XDG_RUNTIME_DIR/sway.sock
+#set $SWAYSOCK $XDG_RUNTIME_DIR/sway.sock
+exec systemctl --user import-environment SWAYSOCK
 
+output eDP-1 resolution 1920x1280
+output eDP-1 scale 1
+#position 1920,0
 output * bg /usr/share/backgrounds/sway/pghm-mountain.jpg fill
-
-output eDP-1 resolution 1920x1080 position 1920,0
 exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
+
+font Iosevka 18
 
 ### Idle configuration
 #
@@ -45,29 +48,16 @@ exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
 # resumed. It will also lock your screen before your computer goes to sleep.
 
 ### Input configuration
-#
-# Example configuration:
-#
+# You can get the names of your inputs by running: swaymsg -t get_inputs
+# Read `man 5 sway-input` for more information about this section.
+
    input "1118:2415:Microsoft_Surface_Type_Cover_Touchpad" {
    tap enabled
    pointer_accel 0.5
    accel_profile adaptive
 
    }
-#       dwt enabled
-#       tap enabled
-#       natural_scroll enabled
-#       middle_emulation enabled
-#   }
 
-#Section "InputClass"
-#  Identifier "touchpad"
-#  Driver "libinput"
-#  Option "Tapping" "on"
-#  Option "AccelSpeed" "0.3"
-#EndSection
-# You can get the names of your inputs by running: swaymsg -t get_inputs
-# Read `man 5 sway-input` for more information about this section.
 
 input "1118:2415:Microsoft_Surface_Type_Cover" {
   xkb_layout us,ru,ua
@@ -77,17 +67,13 @@ input "1118:2415:Microsoft_Surface_Type_Cover" {
 }
 
 ### Key bindings
-#
-# Basics:
-#
-    # Start a terminal
     bindsym $mod+Return exec $term
-
-    # Kill focused window
     bindsym $mod+Shift+q kill
-
-    # Launcher
-    bindsym $mod+d exec rofi -show run -normal-window | xargs swaymsg exec --
+    #bindsym $mod+d exec rofi -show run -normal-window | xargs swaymsg exec --
+    bindsym $mod+d exec $menu | xargs swaymsg exec --
+    bindsym $mod+n exec networkmanager_dmenu | xargs swaymsg exec --
+    bindsym $mod+p exec ~/.local/bin/mypassmenu | xargs swaymsg exec --
+    bindsym $mod+t exec ~/.local/bin/mypassmenu --otp | xargs swaymsg exec --
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -221,6 +207,8 @@ bindsym $mod+r mode "resize"
 bar {
     position bottom
 
+    font monospace 15
+
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
     status_command i3status
@@ -278,5 +266,6 @@ bindsym $mod+Escape mode "$mode_system"
 
 # Window specific config
 for_window [class="Rofi"] floating enable, resize set 600 400
+for_window [app_id="^launcher$"] floating enable, sticky enable, resize set 40 ppt 60 ppt, border pixel 10
 
 include /etc/sway/config.d/*
