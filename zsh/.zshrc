@@ -107,10 +107,11 @@ export PATH=~/.local/bin:~/.cargo/bin:/usr/lib/jvm/default/bin:${PATH}
 # xrandr to scale the display down
 # (https://ricostacruz.com/til/fractional-scaling-on-xorg-linux)
 export GDK_SCALE=2
-export GDK_DPI_SCALE=0.5
+export GDK_DPI_SCALE=2
 export QT_AUTO_SCREEN_SET_FACTOR=0
-export QT_SCALE_FACTOR=2
+export QT_SCALE_FACTOR=1
 export QT_FONT_DPI=96
+
 # for SSH agent .service
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 # Wine

@@ -1,5 +1,3 @@
-alias t=task
-
 # GIT
 alias g="git"
 alias gs="git status"
@@ -19,3 +17,4 @@ alias emacs="TERM=xterm-256color emacs"
 alias hotspot="sudo create_ap -n --ieee80211n --ieee80211ac wlan0 ИНОАГЕНТ blagodat"
 alias cairpods="echo -e \"connect D0:65:44:5F:AB:C2\" | bluetoothctl && sleep 5 && pactl set-default-sink bluez_output.D0_65_44_5F_AB_C2.a2dp-sink"
 alias dairpods="echo -e \"disconnect D0:65:44:5F:AB:C2\" | bluetoothctl"
+alias vcam="sudo gst-launch-1.0 libcamerasrc camera-name='\\_SB_.PCI0.LNK1' ! video/x-raw,width=1280,height=720,framerate=30/1,format=NV12 ! videoconvert ! video/x-raw,format=YUY2 ! videoconvert ! v4l2sink device=/dev/video42"
