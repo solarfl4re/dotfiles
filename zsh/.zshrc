@@ -99,6 +99,11 @@ function adestart {
 # Source my aliases
 source $HOME/.aliases
 
+# Source other stuff
+source /usr/share/fzf/completion.zsh
+source /usr/share/fzf/key-bindings.zsh
+
+
 #export WSL_HOST=$(cat /etc/resolv.conf | grep nameserver | awk {'print $2; exit;'})
 #export ADB_SERVER_SOCKET=tcp:$WSL_HOST:5037
 export PATH=~/.local/bin:~/.cargo/bin:/usr/lib/jvm/default/bin:${PATH}
