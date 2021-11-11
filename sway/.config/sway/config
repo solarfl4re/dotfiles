@@ -25,6 +25,9 @@ set $menu exec $term --class=launcher -e /usr/bin/sway-launcher-desktop
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 #set $SWAYSOCK $XDG_RUNTIME_DIR/sway.sock
 exec systemctl --user import-environment SWAYSOCK
+exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY
+exec hash dbus-update-activation-environment 2>/dev/null && \
+     dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
 
 output eDP-1 resolution 1920x1280
 output eDP-1 scale 1
@@ -37,11 +40,10 @@ font Iosevka 18
 ### Idle configuration
 #
 # Example configuration:
-#
-# exec swayidle -w \
-#          timeout 300 'swaylock -f -c 000000' \
-#          timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
-#          before-sleep 'swaylock -f -c 000000'
+ exec swayidle -w \
+          timeout 300 'swaylock' \
+          timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+          before-sleep 'swaylock'
 #
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
@@ -163,11 +165,6 @@ input "1118:2415:Microsoft_Surface_Type_Cover" {
 
     # Move focus to the parent container
     bindsym $mod+a focus parent
-#
-# Scratchpad:
-#
-    # Sway has a "scratchpad", which is a bag of holding for windows.
-    # You can send windows there and get them back later.
 
     # Move the currently focused window to the scratchpad
     bindsym $mod+Shift+minus move scratchpad
@@ -175,26 +172,17 @@ input "1118:2415:Microsoft_Surface_Type_Cover" {
     # Show the next scratchpad window or hide the focused scratchpad window.
     # If there are multiple scratchpad windows, this command cycles through them.
     bindsym $mod+minus scratchpad show
-#
-# Resizing containers:
-#
+
 mode "resize" {
-    # left will shrink the containers width
-    # right will grow the containers width
-    # up will shrink the containers height
-    # down will grow the containers height
     bindsym $left resize shrink width 10px
     bindsym $down resize grow height 10px
     bindsym $up resize shrink height 10px
     bindsym $right resize grow width 10px
 
-    # Ditto, with arrow keys
     bindsym Left resize shrink width 10px
     bindsym Down resize grow height 10px
     bindsym Up resize shrink height 10px
     bindsym Right resize grow width 10px
-
-    # Return to default mode
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
@@ -205,36 +193,25 @@ bindsym $mod+r mode "resize"
 #
 # Read `man 5 sway-bar` for more information about this section.
 bar {
-    position bottom
+  swaybar_command waybar
 
-    font monospace 15
 
-    # When the status_command prints a new line to stdout, swaybar updates.
-    # The default just shows the current date and time.
-    status_command i3status
-
-#    colors {
-#        statusline #ffffff
-#        background #323232
-#        inactive_workspace #32323200 #32323200 #5c5c5c
-#    }
+#    position bottom
+#    font monospace 15
+#    status_command i3status
 }
 
 # My stuff
 # Audio
 set $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
 
-# 5%
-bindsym XF86AudioRaiseVolume exec amixer sset Master 5%+ | sed -En 's/.*\[([0-9]+)%\].*/\1/p' | head -1 > $WOBSOCK
-bindsym XF86AudioLowerVolume exec amixer sset Master 5%- | sed -En 's/.*\[([0-9]+)%\].*/\1/p' | head -1 > $WOBSOCK
-# 1%
-bindsym Control+XF86AudioRaiseVolume exec amixer sset Master 1%+ | sed -En 's/.*\[([0-9]+)%\].*/\1/p' | head -1 > $WOBSOCK
-bindsym Control+XF86AudioLowerVolume exec amixer sset Master 1%- | sed -En 's/.*\[([0-9]+)%\].*/\1/p' | head -1 > $WOBSOCK
-bindsym XF86AudioMute exec amixer sset Master toggle | sed -En '/\[on\]/ s/.*\[([0-9]+)%\].*/\1/ p; /\[off\]/ s/.*/0/p' | head -1 > $WOBSOCK
+bindsym XF86AudioRaiseVolume exec pamixer -i 5 && pamixer --get-volume > $WOBSOCK
+bindsym XF86AudioLowerVolume exec pamixer -d 5 && pamixer --get-volume > $WOBSOCK
+bindsym XF86AudioMute exec pamixer -t
 
 # Brightness
-bindsym XF86MonBrightnessUp exec light -A 5 && light -G | cut -d'.' -f1 > $WOBSOCK
-bindsym XF86MonBrightnessDown exec light -U 5 && light -G | cut -d'.' -f1 > $WOBSOCK
+bindsym XF86MonBrightnessUp exec light -A 3 && light -G | cut -d'.' -f1 > $WOBSOCK
+bindsym XF86MonBrightnessDown exec light -U 3 && light -G | cut -d'.' -f1 > $WOBSOCK
 
 # Airpods connect/disconnect menu
 set $mode_devices (c)connect Airpods (d)Disconnect Airpods
@@ -247,13 +224,14 @@ mode "$mode_devices" {
 }
 bindsym $mod+c mode "$mode_devices"
 
-set $mode_system (l)lock  (e)logout  (s)suspend  (h)hibernate  (r)reboot  (Shift+s)shutdown
+set $Locker swaylock
+
+set $mode_system (l)lock  (e)logout  (s)suspend (r)reboot  (Shift+s)shutdown
  
 mode "$mode_system" {
 	bindsym l exec --no-startup-id $Locker, mode "default"
-	bindsym e exec --no-startup-id i3-msg exit, mode "default"
-	bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
-	bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
+	bindsym e exec --no-startup-id swaymsg exit, mode "default"
+	bindsym s exec --no-startup-id systemctl suspend, mode "default"
 	bindsym r exec --no-startup-id systemctl reboot, mode "default"
 	bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
 
@@ -263,6 +241,9 @@ mode "$mode_system" {
 }
 
 bindsym $mod+Escape mode "$mode_system"
+
+# Tray
+exec nm-applet --indicator
 
 # Window specific config
 for_window [class="Rofi"] floating enable, resize set 600 400
