@@ -19,6 +19,7 @@ set $term alacritty
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
 set $menu exec $term --class=launcher -e /usr/bin/sway-launcher-desktop
+set $audiobook exec $term --title " Audiobook" -e ~/.local/bin/choose-nl-audiobook.sh
 
 ### Output configuration
 #
@@ -214,10 +215,11 @@ bindsym XF86MonBrightnessUp exec light -A 3 && light -G | cut -d'.' -f1 > $WOBSO
 bindsym XF86MonBrightnessDown exec light -U 3 && light -G | cut -d'.' -f1 > $WOBSOCK
 
 # Airpods connect/disconnect menu
-set $mode_devices (c)connect Airpods (d)Disconnect Airpods
+set $mode_devices (c)connect Airpods (d)Disconnect Airpods (a) Play audiobook
 mode "$mode_devices" {
   bindsym c exec --no-startup-id echo -e "connect D0:65:44:5F:AB:C2" | bluetoothctl && sleep 5 && pactl set-default-sink bluez_output.D0_65_44_5F_AB_C2.a2dp-sink, mode "default"
   bindsym d exec --no-startup-id echo -e "disconnect D0:65:44:5F:AB:C2" | bluetoothctl, mode "default"
+  bindsym a exec --no-startup-id $audiobook, mode "default"
 
   bindsym Return mode "default"
   bindsym Escape mode "default"
