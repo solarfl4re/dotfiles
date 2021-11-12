@@ -6,6 +6,6 @@ then
 else
   cd /media/nl/torrents/audiobooks
 fi
-ls -ct | fzf --bind 'enter:execute(mpv --no-audio-display {})' --bind 'tab:execute(choose-nl-audiobook.sh {})'
+ls -ct | fzf --bind 'enter:execute(mpv {})' --bind 'tab:execute(choose-nl-audiobook.sh {})'
  --history=~/.config/fzf/.audiobook
 
