@@ -34,7 +34,6 @@ output eDP-1 resolution 1920x1280
 output eDP-1 scale 1
 #position 1920,0
 output * bg /usr/share/backgrounds/sway/pghm-mountain.jpg fill
-exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
 
 font Iosevka 18
 
@@ -59,6 +58,10 @@ font Iosevka 18
    pointer_accel 0.5
    accel_profile adaptive
 
+   }
+
+   input "1133:4136:Logitech_M570" {
+   pointer_accel 0.6
    }
 
 
