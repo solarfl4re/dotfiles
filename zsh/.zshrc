@@ -106,21 +106,24 @@ source /usr/share/fzf/key-bindings.zsh
 
 #export WSL_HOST=$(cat /etc/resolv.conf | grep nameserver | awk {'print $2; exit;'})
 #export ADB_SERVER_SOCKET=tcp:$WSL_HOST:5037
-export PATH=~/.local/bin:~/.cargo/bin:/usr/lib/jvm/default/bin:${PATH}
+export PATH=~/.local/bin:${PATH}
 
 # HighDPI scaling: scale by 2 and then use
 # xrandr to scale the display down
 # (https://ricostacruz.com/til/fractional-scaling-on-xorg-linux)
-export GDK_SCALE=2
-export GDK_DPI_SCALE=2
-export QT_AUTO_SCREEN_SET_FACTOR=0
-export QT_SCALE_FACTOR=1
-export QT_FONT_DPI=96
+#export GDK_SCALE=2
+#export GDK_DPI_SCALE=2
+#export QT_AUTO_SCREEN_SET_FACTOR=0
+#export QT_SCALE_FACTOR=1
+#export QT_FONT_DPI=96
 
 # for SSH agent .service
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 # Wine
 export WINEPREFIX=~/.local/wine
 export TERMINAL=alacritty
+
+# Node.js stuff
+export npm_config_prefix="~/.local/"
 # Too slow!
 #source /usr/share/nvm/init-nvm.sh

@@ -9,14 +9,24 @@ alias gd="git diff HEAD"
 alias ls="ls -F"
 alias lt="ls -ctr | tail -n 5"
 
-alias youtube-playlist="youtube-dl -x -f bestaudio -o \"%(playlist_index)s - %(title)s.%(ext)s\""
+alias yt-dlplaylist="yt-dlp -o \"%(playlist_index)s - %(title)s.%(ext)s\""
 alias youtube-cover="youtube-dl --write-thumbnail --playlist-items 1 --skip-download -o \"cover.%(ext)s\""
-alias emacs="TERM=xterm-256color emacs"
+#alias emacs="TERM=xterm-256color emacs"
 #alias audacity="QT_SCALE_FACTOR=2 audacity"
 #alias xournalpp="GDK_SCALE=2 GDK_DPI_SCALE=0.5 xournalpp"
 alias hotspot="sudo create_ap -n --ieee80211n --ieee80211ac wlan0 ИНОАГЕНТ blagodat"
-alias cairpods="echo -e \"connect D0:65:44:5F:AB:C2\" | bluetoothctl && sleep 5 && pactl set-default-sink bluez_output.D0_65_44_5F_AB_C2.a2dp-sink"
-alias dairpods="echo -e \"disconnect D0:65:44:5F:AB:C2\" | bluetoothctl"
-alias vcam="sudo gst-launch-1.0 libcamerasrc camera-name='\\_SB_.PCI0.LNK1' ! video/x-raw,width=1280,height=720,framerate=30/1,format=NV12 ! videoconvert ! video/x-raw,format=YUY2 ! videoconvert ! v4l2sink device=/dev/video42"
+# If I ever get wireless earbuds again, update these with the MAC address
+#alias cairpods="echo -e \"connect D0:65:44:5F:AB:C2\" | bluetoothctl && sleep 5 && pactl set-default-sink bluez_output.D0_65_44_5F_AB_C2.a2dp-sink"
+#alias dairpods="echo -e \"disconnect D0:65:44:5F:AB:C2\" | bluetoothctl"
+alias mpv="mpv --hwdec=auto-safe"
 # Hide the album art for audiobooks, etc
-alias mpva="mpv --no-audio-display"
+alias mpva="mpv --hwdec=auto-safe --no-audio-display"
+alias p="proxychains -q"
+# Because Pipewire? This makes A. work better
+alias audacity="env PULSE_LATENCY_MSEC=30 audacity"
+alias sudo="sudo -v; sudo "
+alias sudodiff="VISUAL='nvim -d' sudoedit"
+
+# Pacman
+# # from https://wiki.archlinux.org/title/Pacman/Pacnew_and_Pacsave
+alias pacman-find-pacnew-pacsave='find /etc -regextype posix-extended -regex ".+\.pac(new|save)" 2> /dev/null'
