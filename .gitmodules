@@ -1,3 +1,6 @@
 [submodule "nvim/.config/nvim/keymap"]
 	path = nvim/.config/nvim/keymap
 	url = https://github.com/solarfl4re/vim-colemak-ru-uk-keymaps.git
+[submodule "py3status/.config/py3status/modules/keyboard_layout_sway"]
+	path = py3status/.config/py3status/modules/keyboard_layout_sway
+	url = https://github.com/javiertury/keyboard_layout_sway.git
