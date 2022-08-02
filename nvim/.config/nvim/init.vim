@@ -7,6 +7,7 @@ Plug 'masukomi/vim-markdown-folding'
 Plug 'arzg/vim-corvine'
 Plug 'morhetz/gruvbox'
 Plug 'altercation/vim-colors-solarized'
+Plug 'overcache/NeoSolarized'
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'tpope/vim-fugitive'
 Plug 'pangloss/vim-javascript'
@@ -29,7 +30,7 @@ set autoindent
 " Color
 set termguicolors
 set background=light
-colorscheme corvine_light
+colorscheme NeoSolarized
 
 " <leader>
 let mapleader=","
