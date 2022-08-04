@@ -1,0 +1,271 @@
+# Default config for sway
+
+# Copy this to ~/.config/sway/config and edit it to your liking.
+#
+# Read `man 5 sway` for a complete reference.
+
+### Variables
+# Logo key. Use Mod1 for Alt.
+set $mod Mod4
+# Home row direction keys, like vim
+set $left h
+set $down j
+set $up k
+set $right l
+# Your preferred terminal emulator
+set $term alacritty
+# Your preferred application launcher
+# Note: pass the final command to swaymsg so that the resulting window can be opened
+# on the original workspace that the command was run on.
+set $menu exec $term --class=launcher -e /usr/bin/sway-launcher-desktop
+set $audiobook exec $term --title " Audiobook" -e ~/.local/bin/choose-nl-audiobook.sh
+
+workspace_layout tabbed
+
+# Language-agnostic bindings
+set $unibind bindsym --to-code
+
+### Output configuration
+#
+# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
+#set $SWAYSOCK $XDG_RUNTIME_DIR/sway.sock
+exec systemctl --user import-environment SWAYSOCK
+exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY
+exec hash dbus-update-activation-environment 2>/dev/null && \
+     dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
+
+output eDP-1 {
+  resolution 2256x1504
+  scale 2
+  }
+##position 1920,0
+output * bg ~/pictures/ukr-troops-hummer.jpg fill
+
+#font Iosevka 18
+#exec yambar
+
+### Idle configuration
+#
+# Example configuration:
+ exec swayidle -w \
+          timeout 300 'swaylock' \
+          timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+          before-sleep 'swaylock'
+#
+# This will lock your screen after 300 seconds of inactivity, then turn off
+# your displays after another 300 seconds, and turn your screens back on when
+# resumed. It will also lock your screen before your computer goes to sleep.
+
+### Input configuration
+# You can get the names of your inputs by running: swaymsg -t get_inputs
+# Read `man 5 sway-input` for more information about this section.
+   
+   input "2362:628:PIXA3854:00_093A:0274_Touchpad" {
+   tap "enabled"
+   pointer_accel 0.4
+   scroll_method "two_finger"
+   accel_profile "adaptive"
+   }
+
+input "1:1:AT_Translated_Set_2_keyboard" {
+  xkb_layout us,ru,ua
+  xkb_model pc104
+  xkb_variant colemak,,
+  xkb_options grp:alt_space_toggle,ctrl:nocaps
+}
+
+### Key bindings
+    $unibind $mod+Return exec $term
+    $unibind $mod+Shift+q kill
+    #bindsym $mod+d exec rofi -show run -normal-window | xargs swaymsg exec --
+    $unibind $mod+d exec $menu | xargs swaymsg exec --
+    $unibind $mod+n exec networkmanager_dmenu | xargs swaymsg exec --
+    $unibind $mod+p exec ~/.local/bin/mypassmenu | xargs swaymsg exec --
+    $unibind $mod+t exec ~/.local/bin/mypassmenu --otp | xargs swaymsg exec --
+
+    # Drag floating windows by holding down $mod and left mouse button.
+    # Resize them with right mouse button + $mod.
+    # Despite the name, also works for non-floating windows.
+    # Change normal to inverse to use left mouse button for resizing and right
+    # mouse button for dragging.
+    floating_modifier $mod normal
+
+    # Reload the configuration file
+    $unibind $mod+Shift+c reload
+    
+    # Exit sway (logs you out of your Wayland session)
+    $unibind $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
+#
+# Moving around:
+#
+    # Move your focus around
+    $unibind $mod+$left focus left
+    $unibind $mod+$down focus down
+    $unibind $mod+$up focus up
+    $unibind $mod+$right focus right
+    # Or use $mod+[up|down|left|right]
+    $unibind $mod+Left focus left
+    $unibind $mod+Down focus down
+    $unibind $mod+Up focus up
+    $unibind $mod+Right focus right
+
+    # Move the focused window with the same, but add Shift
+    $unibind $mod+Shift+$left move left
+    $unibind $mod+Shift+$down move down
+    $unibind $mod+Shift+$up move up
+    $unibind $mod+Shift+$right move right
+    # Ditto, with arrow keys
+    $unibind $mod+Shift+Left move left
+    $unibind $mod+Shift+Down move down
+    $unibind $mod+Shift+Up move up
+    $unibind $mod+Shift+Right move right
+#
+# Workspaces:
+#
+    # Switch to workspace
+    $unibind $mod+1 workspace number 1
+    $unibind $mod+2 workspace number 2
+    $unibind $mod+3 workspace number 3
+    $unibind $mod+4 workspace number 4
+    $unibind $mod+5 workspace number 5
+    $unibind $mod+6 workspace number 6
+    $unibind $mod+7 workspace number 7
+    $unibind $mod+8 workspace number 8
+    $unibind $mod+9 workspace number 9
+    $unibind $mod+0 workspace number 10
+    # Move focused container to workspace
+    $unibind $mod+Shift+1 move container to workspace number 1
+    $unibind $mod+Shift+2 move container to workspace number 2
+    $unibind $mod+Shift+3 move container to workspace number 3
+    $unibind $mod+Shift+4 move container to workspace number 4
+    $unibind $mod+Shift+5 move container to workspace number 5
+    $unibind $mod+Shift+6 move container to workspace number 6
+    $unibind $mod+Shift+7 move container to workspace number 7
+    $unibind $mod+Shift+8 move container to workspace number 8
+    $unibind $mod+Shift+9 move container to workspace number 9
+    $unibind $mod+Shift+0 move container to workspace number 10
+    # Note: workspaces can have any name you want, not just numbers.
+    # We just use 1-10 as the default.
+#
+# Layout stuff:
+#
+    # You can "split" the current object of your focus with
+    # $mod+b or $mod+v, for horizontal and vertical splits
+    # respectively.
+    $unibind $mod+b splith
+    $unibind $mod+v splitv
+
+    # Switch the current container between different layout styles
+    $unibind $mod+s layout stacking
+    $unibind $mod+w layout tabbed
+    $unibind $mod+e layout toggle split
+
+    # Make the current focus fullscreen
+    $unibind $mod+f fullscreen
+
+    # Toggle the current focus between tiling and floating mode
+    $unibind $mod+Shift+space floating toggle
+
+    # Swap focus between the tiling area and the floating area
+    $unibind $mod+space focus mode_toggle
+
+    # Move focus to the parent container
+    $unibind $mod+a focus parent
+
+    # Move the currently focused window to the scratchpad
+    $unibind $mod+Shift+minus move scratchpad
+
+    # Show the next scratchpad window or hide the focused scratchpad window.
+    # If there are multiple scratchpad windows, this command cycles through them.
+    $unibind $mod+minus scratchpad show
+
+mode "resize" {
+    $unibind $left resize shrink width 10px
+    $unibind $down resize grow height 10px
+    $unibind $up resize shrink height 10px
+    $unibind $right resize grow width 10px
+
+    bindsym Left resize shrink width 10px
+    bindsym Down resize grow height 10px
+    bindsym Up resize shrink height 10px
+    bindsym Right resize grow width 10px
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+$unibind $mod+r mode "resize"
+
+#
+# Status Bar:
+#
+# Read `man 5 sway-bar` for more information about this section.
+bar {
+  swaybar_command swaybar
+  status_command py3status
+  font Iosevka 9
+}
+
+# My stuff
+# Audio
+set $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
+
+bindsym XF86AudioRaiseVolume exec pamixer -i 2 && pamixer --get-volume > $WOBSOCK
+bindsym XF86AudioLowerVolume exec pamixer -d 2 && pamixer --get-volume > $WOBSOCK
+bindsym XF86AudioMute exec pamixer -t
+# -> MPRIS daemon
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86AudioNext exec playerctl next
+bindsym Control+XF86AudioNext exec playerctl position 30+
+bindsym Control+XF86AudioPrev exec playerctl position 30-
+
+# Brightness
+bindsym XF86MonBrightnessUp exec light -A 3 && light -G | cut -d'.' -f1 > $WOBSOCK
+bindsym XF86MonBrightnessDown exec light -U 3 && light -G | cut -d'.' -f1 > $WOBSOCK
+
+# Screenshots
+bindsym Print exec grimshot --notify save area
+bindsym Control+Print exec grimshot --notify copy area
+
+# iwctl wifi menu
+$unibind $mod+i exec $term --class=launcher -e /home/david/.local/bin/iwctl-menu
+
+# Airpods connect/disconnect menu
+set $mode_devices (c)connect Airpods (d)Disconnect Airpods (a) Play audiobook
+mode "$mode_devices" {
+  $unibind c exec --no-startup-id echo -e "connect D0:65:44:5F:AB:C2" | bluetoothctl && sleep 5 && pactl set-default-sink bluez_output.D0_65_44_5F_AB_C2.a2dp-sink, mode "default"
+  $unibind d exec --no-startup-id echo -e "disconnect D0:65:44:5F:AB:C2" | bluetoothctl, mode "default"
+  $unibind a exec --no-startup-id $audiobook, mode "default"
+
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+$unibind $mod+c mode "$mode_devices"
+
+set $Locker swaylock
+
+set $mode_system (l)lock  (e)logout  (s)suspend (r)reboot  (Shift+s)shutdown
+ 
+mode "$mode_system" {
+	$unibind l exec --no-startup-id $Locker, mode "default"
+	$unibind e exec --no-startup-id swaymsg exit, mode "default"
+	$unibind s exec --no-startup-id systemctl suspend, mode "default"
+	$unibind r exec --no-startup-id systemctl reboot, mode "default"
+	$unibind Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
+
+	# back to normal: Enter or Escape
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+
+bindsym $mod+Escape mode "$mode_system"
+
+# Tray
+#exec nm-applet --indicator
+exec sway-audio-idle-inhibit
+
+# Window specific config
+for_window [class="Rofi"] floating enable, resize set 600 400
+for_window [app_id="^launcher$"] floating enable, sticky enable, resize set 40 ppt 60 ppt, border pixel 10
+for_window [id=119] opacity set 0.5
+
+include /etc/sway/config.d/*
