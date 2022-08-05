@@ -230,11 +230,11 @@ bindsym Control+Print exec grimshot --notify copy area
 $unibind $mod+i exec $term --class=launcher -e /home/david/.local/bin/iwctl-menu
 
 # Airpods connect/disconnect menu
-set $mode_devices (c)connect Airpods (d)Disconnect Airpods (a) Play audiobook
+set $mode_devices (c)connect Airpods (d)Disconnect Airpods (u) upload torrent -> nl
 mode "$mode_devices" {
   $unibind c exec --no-startup-id echo -e "connect D0:65:44:5F:AB:C2" | bluetoothctl && sleep 5 && pactl set-default-sink bluez_output.D0_65_44_5F_AB_C2.a2dp-sink, mode "default"
   $unibind d exec --no-startup-id echo -e "disconnect D0:65:44:5F:AB:C2" | bluetoothctl, mode "default"
-  $unibind a exec --no-startup-id $audiobook, mode "default"
+  $unibind u exec --no-startup-id $term --class=launcher -e ~/.local/bin/upload-torrent.sh
 
   bindsym Return mode "default"
   bindsym Escape mode "default"
