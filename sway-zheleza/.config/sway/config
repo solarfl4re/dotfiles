@@ -68,9 +68,9 @@ output * bg ~/pictures/ukr-troops-hummer.jpg fill
    }
 
 input "1:1:AT_Translated_Set_2_keyboard" {
-  xkb_layout us,ru,ua
+  xkb_layout us,colemak-capscontrol,ru,ua
   xkb_model pc104
-  xkb_variant colemak,,
+  xkb_variant ,,,
   xkb_options grp:alt_space_toggle,ctrl:nocaps
 }
 

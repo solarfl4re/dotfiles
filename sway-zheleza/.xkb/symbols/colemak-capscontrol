@@ -1,0 +1,8 @@
+default partial alphanumeric_keys
+xkb_symbols "basic" {
+  include "us(colemak)"
+  name[Group1] = "Colemak Caps as Ctl";
+  key <CAPS> { [    Control_L,    Control_L,       Control_L,        Control_L ] };
+  };
+
+
